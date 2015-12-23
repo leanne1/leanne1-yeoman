@@ -3,11 +3,11 @@
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-leanne1-react using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and leanne1-yeoman-react using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g https://github.com/leanne1/leanne1-yeoman-react-redux.git
+npm install -g https://github.com/leanne1/leanne1-yeoman-react.git
 ```
 
 Then generate your new project:
