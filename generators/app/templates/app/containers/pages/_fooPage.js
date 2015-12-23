@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
-import { pageActions, userActions } from '../../actions/';
+import { pageActions } from '../../actions/';
 
 export class FooPage extends Component { 
     static propTypes = {
