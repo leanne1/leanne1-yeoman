@@ -1,0 +1,8 @@
+{
+  "name": "<%= projectName %>",
+  "version": "0.0.0",
+  "description": "<%= projectName %> web app",
+  "devDependencies": {
+    "tools-config": "https://github.com/leanne1/leanne1-gulp-recipes.git"
+  }
+}

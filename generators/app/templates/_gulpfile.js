@@ -27,7 +27,7 @@ var uglify = require('gulp-uglify');
 //+ Private vars
 //++++++++++++++++++++++
 
-var portNumber = 3001;
+var portNumber = 8080;
 
 //++++++++++++++++++++++++
 //+ CLI tasks [public]
@@ -67,7 +67,7 @@ gulp.task('default', function( callback ) {
 var bundleAppCssDebug = 'app.debug.css';
 
 gulp.task('modules:app-less', function () {
-    lessModules(['./app/index.less'], bundleAppCssDebug);
+    lessModules(['./styles/index.less'], bundleAppCssDebug);
 });
 
 function lessModules (sourceFiles, bundleDebugName) {
@@ -247,7 +247,7 @@ gulp.task('test:dev', function (done) {
 
 gulp.task('watch:less', function () {
 	return gulp.watch([
-		'app/**/*.less'
+		'styles/**/*.less'
 	], ['modules:app-less']);
 });
 
