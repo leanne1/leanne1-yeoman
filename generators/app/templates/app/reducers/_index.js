@@ -1,5 +1,3 @@
-'use strict';
-
 import { combineReducers } from 'redux';
 <% if (hasRouter === true) { %>
 import { routerStateReducer as router } from 'redux-router';
