@@ -1,19 +1,19 @@
-# leanne1-yeoman-react [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Yeoman generator for creating react projects with optional redux and less support
+# leanne1-yeoman [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+> Yeoman generator for creating web projects with optional React and Redux support
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and leanne1-yeoman-react using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and leanne1-yeoman using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g https://github.com/leanne1/leanne1-yeoman-react.git
+npm install -g https://github.com/leanne1/leanne1-yeoman.git
 ```
 
 Then generate your new project:
 
 ```bash
-yo leanne1-react
+yo leanne1-project
 ```
 
 ## Getting To Know Yeoman

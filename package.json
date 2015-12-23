@@ -1,7 +1,7 @@
 {
-  "name": "generator-leanne1-react",
+  "name": "generator-leanne1-project",
   "version": "0.0.0",
-  "description": "Yeoman generator for creating React projects with optional redux and Less support",
+  "description": "Yeoman generator for creating web projects with optional React and Redux support",
   "homepage": "",
   "author": {
     "name": "Leanne Tite",
@@ -30,7 +30,7 @@
     "gulp-plumber": "^1.0.0",
     "gulp-nsp": "^2.1.0"
   },
-  "repository": "https://github.com/leanne1//generator-leanne1-react",
+  "repository": "https://github.com/leanne1/leanne1-yeoman.git",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp"

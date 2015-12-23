@@ -9,7 +9,7 @@ module.exports = yeoman.generators.Base.extend({
 
         // Have Yeoman greet the user.
         this.log(yosay(
-            'Welcome to the ' + chalk.red('leanne1-react') + ' generator!'
+            'Welcome to the ' + chalk.red('leanne1-project') + ' generator!'
         ));
 
         var prompts = [{
@@ -17,11 +17,11 @@ module.exports = yeoman.generators.Base.extend({
             message: 'Select the tools your project will use:',
             name: 'tools',
             choices: [{
-                name: 'router'
+                name: 'react',
             },{
                 name: 'redux'
             },{
-                name: 'less',
+                name: 'router'
             }]
         }];
 
@@ -33,16 +33,6 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     writing: function () {
-        // Copy hidden build config files
-        this.fs.copy(
-            this.templatePath('config/.**'),
-            this.destinationPath('./')
-        );
-        // Copy build config files
-        this.fs.copy(
-            this.templatePath('config/**'),
-            this.destinationPath('./')
-        );
         // Copy bundles
         this.fs.copy(
             this.templatePath('bundles/**/*'),
