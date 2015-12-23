@@ -20,11 +20,6 @@ yo leanne1-react
 
 Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he&#39;s very easy to work with. If you think he&#39;s too opinionated, he can be easily convinced. Feel free to [learn more about him](http://yeoman.io/).
 
-## License
-
-Unlicense © [Leanne Tite](https://github.com/leanne1/)
-
-
 [npm-image]: https://badge.fury.io/js/generator-leanne1-react.svg
 [npm-url]: https://npmjs.org/package/generator-leanne1-react
 [travis-image]: https://travis-ci.org/https://github.com/leanne1//generator-leanne1-react.svg?branch=master
