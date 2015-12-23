@@ -193,8 +193,8 @@ module.exports = yeoman.generators.Base.extend({
                     this.destinationPath('app/reducers/reducers/pageReducers.js')
                 );
                 this.fs.copy(
-                    this.templatePath('app/containers/pages/_fooPage.js'),
-                    this.destinationPath('app/containers/pages/fooPage.js')
+                    this.templatePath('app/containers/pages/_FooPage.js'),
+                    this.destinationPath('app/containers/pages/FooPage.js')
                 );
             }      
         }
