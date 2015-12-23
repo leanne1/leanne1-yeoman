@@ -78,8 +78,8 @@ module.exports = yeoman.generators.Base.extend({
         );
         // Copy README
         this.fs.copyTpl(
-            this.templatePath('_README'),
-            this.destinationPath('README'),
+            this.templatePath('_README.md'),
+            this.destinationPath('README.md'),
             userValues
         );
         // Add main app dir index.html 

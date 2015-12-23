@@ -4,7 +4,7 @@
 
 ## Run up the app
 - Clone this repo
-- `npm install
+- `npm install`
 - `bower install`
 - `gulp`
 - Open `http://localhost:8080`
