@@ -6,7 +6,9 @@ import { bindActionCreators } from 'redux';
 import { fooActions } from '../actions/';
 
 export class App extends Component { 
-    static propTypes = {}
+    static propTypes = {
+        fooActions: React.PropTypes.object.isRequired
+    }
     constructor(props) {
         super(props);
     }
