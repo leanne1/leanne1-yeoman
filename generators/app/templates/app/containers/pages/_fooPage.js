@@ -46,4 +46,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // Make redux-react binding
-export default connect(mapStateToProps(), mapDispatchToProps)(FooPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FooPage);
