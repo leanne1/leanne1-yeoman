@@ -119,15 +119,15 @@ module.exports = yeoman.generators.Base.extend({
             }
         }
         // Add App component or container
-        if (userValues.hasReact || (userValues.hasRedux && userValues.hasRouter)) {
+        if (userValues.hasReact && userValues.hasRedux && !userValues.hasRouter) {
+            this.fs.copy(
+                this.templatePath('app/containers/_App.js'),
+                this.destinationPath('app/containers/App.js')
+            );
+        } else {
             this.fs.copy(
                 this.templatePath('app/components/_App.js'),
                 this.destinationPath('app/components/App.js')
-            );
-        } else if (userValues.hasRedux && !userValues.hasRouting) {
-             this.fs.copy(
-                this.templatePath('app/containers/_App.js'),
-                this.destinationPath('app/containers/App.js')
             );
         }
         if (userValues.hasReact && userValues.hasRouter) {

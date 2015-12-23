@@ -1,5 +1,5 @@
 import * as actionTypes from '../../actions/actionTypes';
-const fooActionTypes = actionTypes.fooActionTypes; 
+const fooActionTypes = actionTypes.fooActionTypes;
 
 /**
  * Page reducer: update application foo
@@ -7,11 +7,12 @@ const fooActionTypes = actionTypes.fooActionTypes;
  * @param {object} action
  * @return {String} next state
  */
-export function foo(state='', action) {
+export function foo(state = '', action) {
 	switch (action.type) {
-  		case fooActionTypes.UPDATE_FOO:
-    		return state.set('foo', action.foo);
-    	default:
-    		return state;
-  	}
+		case fooActionTypes.UPDATE_FOO:
+			return state.set('foo', action.foo);
+		default:
+			return state;
+	}
 }
+
