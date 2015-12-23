@@ -1,5 +1,4 @@
-// React app
-<% if (hasReact === true) { %>
+<% if (hasReact === true && hasRouter !== true && hasRedux !== true) { %>
 import React from 'react';
 import { render } from 'react-dom';
 import { App } from '../components';
@@ -7,8 +6,7 @@ import { App } from '../components';
 render(App, document.getElementById('<%= projectNameKebabCase %>-app'));
 <% } %> 
 
-// React app with routing
-<% if (hasReact === true && hasRouter === true) { %>
+<% if (hasReact === true && hasRouter === true && hasRedux !== true) { %>
 import { render } from 'react-dom';
 import { Router } from 'react-router';
 import history from './router/history';
@@ -19,7 +17,6 @@ render(
 ), document.getElementById('<%= projectNameKebabCase %>-app'));
 <% } %> 
 
-// React app with Redux and routing
 <% if (hasReact === true && hasRouter === true && hasRedux === true) { %>
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -35,9 +32,7 @@ render((
 ), document.getElementById('<%= projectNameKebabCase %>-app'));
 <% } %>
 
-
-// React app with Redux, but no routing
-<% if (hasReact === true && hasRedux === true) { %>
+<% if (hasReact === true && hasRedux === true && hasRouter !== true) { %>
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './containers/App'

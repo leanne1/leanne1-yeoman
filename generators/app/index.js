@@ -111,6 +111,12 @@ module.exports = yeoman.generators.Base.extend({
                 this.templatePath('app/components/_index.js'),
                 this.destinationPath('app/components/index.js')
             );
+            if (userValues.hasRouter && !userValues.hasRedux) {
+                this.fs.copy(
+                    this.templatePath('app/components/pages/'),
+                    this.destinationPath('app/components/pages/')
+                );
+            }
         }
         // Add App component or container
         if (userValues.hasReact || (userValues.hasRedux && userValues.hasRouter)) {
@@ -139,35 +145,39 @@ module.exports = yeoman.generators.Base.extend({
         if (userValues.hasRedux) {
             //Utils
             this.fs.copy(
-                this.templatePath('app/utils/_makerActionCreator'),
-                this.destinationPath('app/utils/makerActionCreator.js')
+                this.templatePath('app/utils/_makeActionCreator.js'),
+                this.destinationPath('app/utils/makeActionCreator.js')
             );
             //Store
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath('app/store/_configureStore.js'),
-                this.destinationPath('app/store/configureStore.js')
+                this.destinationPath('app/store/configureStore.js'),
+                userValues
             );  
             //Actions
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath('app/actions/_index.js'),
-                this.destinationPath('app/actions/index.js/')
+                this.destinationPath('app/actions/index.js/'),
+                userValues
             ); 
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath('app/actions/_actionTypes.js'),
-                this.destinationPath('app/actions/actionTypes.js')
+                this.destinationPath('app/actions/actionTypes.js'),
+                userValues
             ); 
             this.fs.copy(
-                this.templatePath('app/actions/actionsCreators/_fooActionCreators.js'),
-                this.destinationPath('app/actions/actionsCreators/fooActionCreators.js')
+                this.templatePath('app/actions/actionCreators/_fooActionCreators.js'),
+                this.destinationPath('app/actions/actionCreators/fooActionCreators.js')
             ); 
             this.fs.copy(
                 this.templatePath('app/actions/thunks/'),
                 this.destinationPath('app/actions/thunks/')
             ); 
             //Reducers
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath('app/reducers/_index.js'),
-                this.destinationPath('app/reducers/index.js')
+                this.destinationPath('app/reducers/index.js'),
+                userValues
             ); 
             this.fs.copy(
                 this.templatePath('app/reducers/reducers/_fooReducers.js'),
@@ -175,21 +185,22 @@ module.exports = yeoman.generators.Base.extend({
             );   
             if (userValues.hasRouter) {
                 this.fs.copy(
-                    this.templatePath('app/actions/actionsCreators/_pageActionCreators.js'),
-                    this.destinationPath('app/actions/actionsCreators/pageActionCreators.js')
+                    this.templatePath('app/actions/actionCreators/_pageActionCreators.js'),
+                    this.destinationPath('app/actions/actionCreators/pageActionCreators.js')
                 );
                 this.fs.copy(
                     this.templatePath('app/reducers/reducers/_pageReducers.js'),
                     this.destinationPath('app/reducers/reducers/pageReducers.js')
                 );
                 this.fs.copy(
-                    this.templatePath('app/containers/pages/'),
-                    this.destinationPath('app/containers/pages/')
+                    this.templatePath('app/containers/pages/_fooPage.js'),
+                    this.destinationPath('app/containers/pages/fooPage.js')
                 );
             }      
         }
     },
 
+    // Npm and bower install
     install: function () {
         this.installDependencies();
     },

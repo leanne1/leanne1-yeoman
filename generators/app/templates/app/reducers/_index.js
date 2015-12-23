@@ -3,15 +3,17 @@
 import { combineReducers } from 'redux';
 <% if (hasRouter === true) { %>
 import { routerStateReducer as router } from 'redux-router';
+import * as pageReducers from './reducers/reducers/pageReducers';
 <% } %> 
-import * as reducers from './reducers/reducers';
+import * as fooReducers from './reducers/reducers/fooReducers';
 
 const reducers = Object.assign({}, 
-	reducers
+	fooReducers
 	<% if (hasRouter === true) { %>
-	,{ router });
+	,pageReducers,	
+	{ router }
 	<% } %> 
-
+	);
 /**
  * Root reducder
  * @description

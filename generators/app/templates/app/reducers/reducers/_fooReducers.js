@@ -7,7 +7,7 @@ const fooActionTypes = actionTypes.fooActionTypes;
  * @param {object} action
  * @return {String} next state
  */
-export function page(state='', action) {
+export function foo(state='', action) {
 	switch (action.type) {
   		case fooActionTypes.UPDATE_FOO:
     		return state.set('foo', action.foo);
