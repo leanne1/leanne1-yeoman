@@ -1,4 +1,4 @@
-# generator-leanne1-react [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# leanne1-yeoman-react [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > Yeoman generator for creating react projects with optional redux and less support
 
 ## Installation
@@ -7,7 +7,7 @@ First, install [Yeoman](http://yeoman.io) and generator-leanne1-react using [npm
 
 ```bash
 npm install -g yo
-npm install -g generator-leanne1-react
+npm install -g https://github.com/leanne1/leanne1-yeoman-react-redux.git
 ```
 
 Then generate your new project:
