@@ -2,7 +2,7 @@ import * as actionTypes from '../../actions/actionTypes';
 const fooActionTypes = actionTypes.fooActionTypes;
 
 /**
- * Page reducer: update application foo
+ * Foo reducer: update application foo
  * @param {String} current state
  * @param {object} action
  * @return {String} next state

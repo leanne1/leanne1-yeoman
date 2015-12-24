@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
 import { pageActions } from '../../actions/';
 
-export class FooPage extends Component { 
+export default class FooPage extends Component { 
     static propTypes = {
         pageActions: React.PropTypes.object.isRequired,
         pushState: React.PropTypes.func.isRequired,
@@ -29,7 +29,7 @@ export class FooPage extends Component {
 /**
  * Props that the container receives from redux state.
  */
-function mapStateToProps() {
+function mapStateToProps(state) {
     return {};
 }
 

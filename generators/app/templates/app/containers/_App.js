@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fooActions } from '../actions/';
 
-export class App extends Component { 
+export default class App extends Component { 
     static propTypes = {
         fooActions: React.PropTypes.object.isRequired
     }
@@ -23,7 +23,7 @@ export class App extends Component {
 /**
  * Props that the container receives from redux state.
  */
-function mapStateToProps() {
+function mapStateToProps(state) {
     return {};
 }
 
