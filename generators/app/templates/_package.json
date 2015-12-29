@@ -4,11 +4,11 @@
     "description": "<%= projectName %> web app",
     "main": "app/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "gulp test"
     },
     "repository": {
         "type": "git",
-        "url": "git@github.com:leanne1/leanne1-<%= projectNameKebabCase %>"
+        "url": "git@github.com:leanne1/<%= projectNameKebabCase %>.git"
     },
     "devDependencies": {
         "babel": "^6.1.18",
@@ -49,6 +49,9 @@
         "less-plugin-bower-resolve": "^0.1.0",
         "lodash.assign": "^3.2.0",
         "phantomjs": "^1.9.18",
+        <% if (hasReact === true) { %>
+        "react-addons-test-utils": "^0.14.0",
+        <% } %> 
         "run-sequence": "^1.1.2",
         "vinyl-buffer": "^1.0.0",
         "vinyl-source-stream": "^1.1.0",

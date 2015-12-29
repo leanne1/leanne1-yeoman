@@ -11,7 +11,7 @@ const reducers = Object.assign({},
 	,pageReducers,
 	{ router }
 	<% } %>
-	);
+);
 /**
  * Root reducder
  * @description
