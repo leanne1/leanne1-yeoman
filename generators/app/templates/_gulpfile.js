@@ -1,44 +1,46 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var csslint = require('gulp-csslint');
-var autoprefixer = require('gulp-autoprefixer');
-var reporter = require('gulp-less-reporter');
-var connect = require('gulp-connect');
-var htmlhint = require('gulp-htmlhint');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var source = require('vinyl-source-stream');
-var lessBower = require('less-plugin-bower-resolve');
-var gutil = require('gulp-util');
-var runSequence = require('run-sequence');
-var Server = require('karma').Server;
-var eslint = require('gulp-eslint');
-var del = require('del');
-var replace = require('gulp-replace');
-var rename = require('gulp-rename');
-var sourcemaps = require('gulp-sourcemaps');
-var minifyCss = require('gulp-minify-css');
-var assign = require('lodash.assign');
-var watchify = require('watchify');
-var buffer = require('vinyl-buffer');
-var uglify = require('gulp-uglify');
+import gulp from 'gulp';
+import less from 'gulp-less';
+import csslint from 'gulp-csslint';
+import autoprefixer from 'gulp-autoprefixer';
+import reporter from 'gulp-less-reporter';
+import connect from 'gulp-connect';
+import htmlhint from 'gulp-htmlhint';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import source from 'vinyl-source-stream';
+import lessBower from 'less-plugin-bower-resolve';
+import gutil from 'gulp-util';
+import runSequence from 'run-sequence';
+import { Server } from 'karma';
+import eslint from 'gulp-eslint';
+import del from 'del';
+import replace from 'gulp-replace';
+import rename from 'gulp-rename';
+import sourcemaps from 'gulp-sourcemaps';
+import minifyCss from 'gulp-minify-css';
+import assign from 'lodash.assign';
+import watchify from 'watchify';
+import buffer from 'vinyl-buffer';
+import uglify from 'gulp-uglify';
+import todo from 'gulp-todo';
 
 //++++++++++++++++++++++
 //+ Private vars
 //++++++++++++++++++++++
 
-var portNumber = 8080;
+const portNumber = 8080;
 
 //++++++++++++++++++++++++
 //+ CLI tasks [public]
 //++++++++++++++++++++++++
 
-gulp.task('default', function( callback ) {
+gulp.task('default', callback => {
 	runSequence(
 		[
 			'clean:build',
 		],
 		[
+			'todo',
 			'copy:package-bundles',
 			'copy:html',
 		],
@@ -56,6 +58,8 @@ gulp.task('default', function( callback ) {
 	, callback);
 });
 
+gulp.task('test:tdd', () => gulp.start('test:dev'));
+
 //++++++++++++++++++++++
 //+ Tasks [private]
 //++++++++++++++++++++++
@@ -64,18 +68,16 @@ gulp.task('default', function( callback ) {
 //+ Less
 //++++++++++++++++++++++
 
-var bundleAppCssDebug = 'app.debug.css';
+const bundleAppCssDebug = 'app.debug.css';
 
-gulp.task('modules:app-less', function () {
-    lessModules(['./styles/index.less'], bundleAppCssDebug);
-});
+gulp.task('modules:app-less', () => lessModules(['./styles/index.less'], bundleAppCssDebug));
 
-function lessModules (sourceFiles, bundleDebugName) {
+const lessModules = (sourceFiles, bundleDebugName) => {
     gulp.src(sourceFiles)
         .pipe(less({
             plugins: [lessBower]
         }))
-        .on('error', function(err){
+        .on('error', err => {
             gutil.log(gutil.colors.red(Error ('Less Error: ') + err.message));
             this.emit('end');
         })
@@ -89,15 +91,15 @@ function lessModules (sourceFiles, bundleDebugName) {
         .pipe(minifyCss({compatibility: 'ie8'}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./build/css'));
-}
+};
 
 //++++++++++++++++++++++
 //+ Javascript
 //++++++++++++++++++++++
 
-var destJs =  './build/js/'
+const destJs = './build/js/';
 
-var globalBrowserifyOpts = {
+const globalBrowserifyOpts = {
     paths: [
         './node_modules', 
         './bower_components/',
@@ -105,61 +107,59 @@ var globalBrowserifyOpts = {
     debug: true
 };
 
-function bundle(b, bundleName, bundleDest) {
+const bundle = (b, bundleName, bundleDest) => {
     return b.bundle()
-        .on('error', function(err){
+        .on('error', err => {
             gutil.log(gutil.colors.red(Error ('Browserify Error: ') + err.message));
             this.emit('end');
         })
         .pipe(source(bundleName))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(gulp.dest(destJs))
-        .pipe(rename(bundleName.replace('debug', 'min')))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
+        // .pipe(buffer())
+        // .pipe(sourcemaps.init({loadMaps: true}))
+        // .pipe(gulp.dest(destJs))
+        // .pipe(rename(bundleName.replace('debug', 'min')))
+        // .pipe(uglify())
+        // .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(bundleDest));
-}
+};
 
-function setUpBrowserify(browserifyOpts, bundleName, bundleDest) {
-    var opts = assign( {}, watchify.args, globalBrowserifyOpts, browserifyOpts );
-    var b = watchify( browserify(opts) ); 
+const setUpBrowserify = (browserifyOpts, bundleName, bundleDest) => {
+    const opts = assign( {}, watchify.args, globalBrowserifyOpts, browserifyOpts );
+    const b = watchify( browserify(opts) ); 
         b.transform(babelify);
-        b.on('update', function(){
+        b.on('update', () => {
             bundle(b, bundleName, bundleDest);
         });
         b.on('log', gutil.log);
     return b;
-}
+};
 
 // Define Browserify bundles, setup Browserify tasks and gulp tasks
 // MAIN BUNDLE
-var mainBundleOpts = {
+const mainBundleOpts = {
     entry: './app/index.js',
     bundleFilename: 'app.debug.js',
     bundleDest: destJs
-}
-var mainBundle = setUpBrowserify({
+};
+const mainBundle = setUpBrowserify({
         entries: [mainBundleOpts.entry]
     },
     mainBundleOpts.bundleFilename,
     mainBundleOpts.bundleDest
 );
-gulp.task('modules:app-js', function() { 
-    bundle(mainBundle, mainBundleOpts.bundleFilename, mainBundleOpts.bundleDest);
-});
+gulp.task('modules:app-js', () => bundle(mainBundle, mainBundleOpts.bundleFilename, mainBundleOpts.bundleDest));
 
 //++++++++++++++++++++++
 //+ Lint
 //++++++++++++++++++++++
 
-gulp.task('lint:js', function() {
+gulp.task('lint:js', () => {
 	return gulp.src(['./app/**/*.{js,jsx}'])
         .pipe(eslint())
         .pipe(eslint.format());
 });
 
-gulp.task('lint:html', function() {
+gulp.task('lint:html', () => {
 	return gulp.src(['./app/**/*.html'])
 		.pipe(htmlhint('./htmlhintrc.json'))
 		.pipe(htmlhint.reporter())
@@ -169,12 +169,12 @@ gulp.task('lint:html', function() {
 //+ Copy
 //++++++++++++++++++++++
 
-gulp.task('copy:html', function () {
+gulp.task('copy:html', () => {
 	return gulp.src('./app/index.html')
 		.pipe(gulp.dest('./build/'));
 });
 
-gulp.task('copy:package-bundles', function () {
+gulp.task('copy:package-bundles', () => {
 	return gulp.src([
 			'./bundles/global.min.css',
 			'./bundles/global.min.css.map',
@@ -188,24 +188,18 @@ gulp.task('copy:package-bundles', function () {
 //+ Clean
 //++++++++++++++++++++++
 
-gulp.task('clean:build', function ( callback ) {
-	del(['./build/'], callback);
-});
+gulp.task('clean:build', callback => del(['./build/'], callback));
 
-gulp.task('clean:js-modules', function ( callback ) {
-	del(['./build/**/*.js', '!./build/bundles/*.*'], callback);
-});
+gulp.task('clean:js-modules', callback => del(['./build/**/*.js', '!./build/bundles/*.*'], callback));
 
-gulp.task('clean:css-modules', function ( callback ) {
-	del(['./build/**/*.css', '!./build/bundles/*.*'], callback);
-});
+gulp.task('clean:css-modules', callback => del(['./build/**/*.css', '!./build/bundles/*.*'], callback));
 
 
 //++++++++++++++++++++++
 //+ Server
 //++++++++++++++++++++++
 
-gulp.task('serve:dev', function() {
+gulp.task('serve:dev', () => {
 	connect.server({
 		root: 'build',
 		port: portNumber,
@@ -218,11 +212,11 @@ gulp.task('serve:dev', function() {
 //++++++++++++++++++++++
 
 // Pre-release test task
-gulp.task('test', function(done) {
+gulp.task('test', done => {
 	Server.start({
 		configFile: __dirname + '/karma.conf.js',
 		singleRun: true
-	}, function( result ) {
+	}, result => {
 		if ( result === 0 ){
 			done();
 		} else if ( result === 1 ) {
@@ -232,33 +226,46 @@ gulp.task('test', function(done) {
 });
 
 // TDD test task
-gulp.task('test:dev', function (done) {
+gulp.task('test:dev', done => {
 	 Server.start({
 		configFile: __dirname + '/karma.conf.js',
 		autoWatch: true
-	}, function() {
+	}, () => {
 		done();
 	});
+});
+
+//++++++++++++++++++++++
+//+ Todo
+//++++++++++++++++++++++
+
+gulp.task('todo', ()  => {
+	return gulp.src([
+		'./app/**/*.js',
+		'./styles/**/*.less'
+	], { base: './' })
+	.pipe(todo())
+	.pipe(gulp.dest('./'));
 });
 
 //++++++++++++++++++++++
 //+ Watch
 //++++++++++++++++++++++
 
-gulp.task('watch:less', function () {
+gulp.task('watch:less', () => {
 	return gulp.watch([
 		'styles/**/*.less'
 	], ['modules:app-less']);
 });
 
-gulp.task('watch:html', function () {
+gulp.task('watch:html', () => {
 	return gulp.watch([
 		'app/**/*.html'
 	], ['copy:html', 'lint:html']);
 });
 
-gulp.task('watch:js', function () {
+gulp.task('watch:js', () => {
 	return gulp.watch([
 		'app/**/*.js'
-	], ['modules:app-js', 'lint:js']);
+	], ['lint:js']);
 });
