@@ -61,8 +61,8 @@ module.exports = yeoman.generators.Base.extend({
         );
         // Copy gulpfile
         this.fs.copy(
-            this.templatePath('_gulpfile.js'),
-            this.destinationPath('gulpfile.js')
+            this.templatePath('_gulpfile.babel.js'),
+            this.destinationPath('gulpfile.babel.js')
         );
         // Copy package.json
         this.fs.copyTpl(
